@@ -13,6 +13,8 @@ Source0:	http://mirror01.users.i.com.ua/~dmitry_z/%{name}-%{version}.tar.gz
 # Source0-md5:	05b23014e79897c1a1e1f126e5f19e21
 URL:		http://mirror01.users.i.com.ua/~dmitry_z/siefs/
 %{?with_dist_kernel:BuildRequires:	kernel-headers >= 2.4}
+BuildRequires:	libfuse-static
+Requires:	fusermount
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,9 +52,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README
 # fuse only
-%doc ChangeLog NEWS README.fuse TODO
+%doc ChangeLog NEWS 
 # fuse
-%attr(755,root,root) %{_bindir}/fusermount
+# %%attr(755,root,root) %{_bindir}/fusermount
 # siefs itself
 %attr(755,root,root) %{_bindir}/siefs
 %attr(755,root,root) %{_bindir}/slink
@@ -60,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 # -devel or fuse-devel?
 #%{_includedir}/fuse.h
 #%{_libdir}/libfuse.a
-
+#
+# It is in kernel-misc-fuse.spec
+#
 # kernel-fs-fuse?
 # /lib/modules/.../fuse.o*
+# It is in kernel-misc-fuse.spec (fuse.o)
