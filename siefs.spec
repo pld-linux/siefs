@@ -1,22 +1,21 @@
-#
-# Conditional build:
-%bcond_without	dist_kernel	# build without kernel from distribution
-#
 Summary:	SieFS - virtual filesystem for Siemens mobile phones' memory
 Summary(pl):	SieFS - wirtualny system plików do pamiêci telefonów komórkowych Siemens
 Name:		siefs
-Version:	0.4
-Release:	1@%{_kernel_ver_str}
-License:	GPL
+Version:	0.5
+Release:	1
+License:	GPL, partially free (see COPYRIGHT.vmo2wav)
 Group:		Base/Kernel
-Source0:	http://mirror01.users.i.com.ua/~dmitry_z/%{name}-%{version}.tar.gz
-# Source0-md5:	d7e72b47e74d89c0385d0abb407d78b5
-URL:		http://mirror01.users.i.com.ua/~dmitry_z/siefs/
-%{?with_dist_kernel:BuildRequires:	kernel-headers >= 2.4}
-BuildRequires:	libfuse-static
-# check it
-Requires:	fusermount
+Source0:	http://chaos.allsiemens.com/download/%{name}-%{version}.tar.gz
+# Source0-md5:	974328fc20b99e975d03a312a2814ed8
+Patch0:		%{name}-fuse-from-flags.patch
+URL:		http://chaos.allsiemens.com/siefs/
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libfuse-devel >= 2.2
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_sbindir	/sbin
 
 %description
 This is SieFS - a virtual filesystem for accessing Siemens mobile
@@ -33,40 +32,36 @@ C55/M50/MT50/SL55/C60.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-%configure2_13 \
-	--with-kernel=%{_kernelsrcdir}
-
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+CFLAGS="%{rpmcflags} $(pkg-config --cflags fuse) -DFUSE_USE_VERSION=22"
+LDFLAGS="%{rpmldflags} $(pkg-config --libs fuse)"
+%configure \
+	--with-fuse=%{_prefix}
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_sbindir}
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+cp converter/README README.vmo2wav
+cp converter/COPYRIGHT COPYRIGHT.vmo2wav
+ln -s ..%{_bindir}/siefs $RPM_BUILD_ROOT%{_sbindir}/mount.siefs
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS README
-# fuse only
-%doc ChangeLog NEWS 
-# fuse
-# %%attr(755,root,root) %{_bindir}/fusermount
-# siefs itself
-%attr(755,root,root) %{_bindir}/siefs
-%attr(755,root,root) %{_bindir}/slink
-%attr(755,root,root) %{_bindir}/vmo2wav
-
-# -devel or fuse-devel?
-#%{_includedir}/fuse.h
-#%{_libdir}/libfuse.a
-#
-# It is in kernel-misc-fuse.spec
-#
-# kernel-fs-fuse?
-# /lib/modules/.../fuse.o*
-# It is in kernel-misc-fuse.spec (fuse.o)
+%doc AUTHORS README* ChangeLog COPYRIGHT.vmo2wav
+%attr(755,root,root) %{_bindir}/*
+/sbin/mount.siefs
