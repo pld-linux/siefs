@@ -1,31 +1,32 @@
 #
 # Conditional build:
-# _without_dist_kernel - build without kernel from distribution
+%bcond_without	dist_kernel	# build without kernel from distribution
 #
 Summary:	SieFS - virtual filesystem for Siemens mobile phones' memory
 Summary(pl):	SieFS - wirtualny system plików do pamiêci telefonów komórkowych Siemens
 Name:		siefs
-Version:	0.1
-Release:	1@%{_kernel_ver_str}
+Version:	0.2
+Release:	0.1@%{_kernel_ver_str}
 License:	GPL
 Group:		Base/Kernel
 Source0:	http://mirror01.users.i.com.ua/~dmitry_z/%{name}-%{version}.tar.gz
-# Source0-md5:	90ee7d5b2801e44c85fffeb9958f641e
+# Source0-md5:	05b23014e79897c1a1e1f126e5f19e21
 URL:		http://mirror01.users.i.com.ua/~dmitry_z/siefs/
-%{!?_without_dist_kernel:BuildRequires:	kernel-headers >= 2.4}
+%{?with_dist_kernel:BuildRequires:	kernel-headers >= 2.4}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This is SieFS - a virtual filesystem for accessing Siemens mobile
 phones' memory via datacable. Now you can mount your phone to a Linux
-box and browse it like a simple directory! The program is tested on
-SL45, but should work also on S45/ME45/M(T)50.
+box and browse it like a simple directory! The program was tested on
+S45/ME45/SL45/S55/M55/MC60, but should work also on C55/M50/MT50/SL55/C60.
 
 %description -l pl
 SieFS - wirtualny system plików udostêpniaj±cy pamiêæ telefonów
 komórkowych Siemens pod³±czonych kablem. Pozwala podmontowaæ telefon
-spod Linuksa i przegl±daæ go tak, jak zwyk³y katalog. Program jest
-testowany na SL45, ale powinien dzia³aæ tak¿e z S45/ME45/M(T)50.
+spod Linuksa i przegl±daæ go tak, jak zwyk³y katalog. Program by³
+testowany na S45/ME45/SL45/S55/MC60, ale powinien dzia³aæ tak¿e z
+C55/M50/MT50/SL55/C60.
 
 %prep
 %setup -q
