@@ -10,6 +10,7 @@ Release:	1@%{_kernel_ver_str}
 License:	GPL
 Group:		Base/Kernel
 Source0:	http://mirror01.users.i.com.ua/~dmitry_z/%{name}-%{version}.tar.gz
+# Source0-md5:	90ee7d5b2801e44c85fffeb9958f641e
 URL:		http://mirror01.users.i.com.ua/~dmitry_z/siefs/
 %{!?_without_dist_kernel:BuildRequires:	kernel-headers >= 2.4}
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
