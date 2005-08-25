@@ -47,7 +47,6 @@ LDFLAGS="%{rpmldflags} $(pkg-config --libs fuse)"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT%{_sbindir}
 
 %{__make} install \
@@ -64,4 +63,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README* ChangeLog COPYRIGHT.vmo2wav
 %attr(755,root,root) %{_bindir}/*
-/sbin/mount.siefs
+%{_sbindir}/mount.siefs
