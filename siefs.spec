@@ -1,5 +1,5 @@
 Summary:	SieFS - virtual filesystem for Siemens mobile phones' memory
-Summary(pl):	SieFS - wirtualny system plików do pamiêci telefonów komórkowych Siemens
+Summary(pl.UTF-8):   SieFS - wirtualny system plikÃ³w do pamiÄ™ci telefonÃ³w komÃ³rkowych Siemens
 Name:		siefs
 Version:	0.5
 Release:	1
@@ -23,11 +23,11 @@ phones' memory via datacable. Now you can mount your phone to a Linux
 box and browse it like a simple directory! The program was tested on
 S45/ME45/SL45/S55/M55/MC60, but should work also on C55/M50/MT50/SL55/C60.
 
-%description -l pl
-SieFS - wirtualny system plików udostêpniaj±cy pamiêæ telefonów
-komórkowych Siemens pod³±czonych kablem. Pozwala podmontowaæ telefon
-spod Linuksa i przegl±daæ go tak, jak zwyk³y katalog. Program by³
-testowany na S45/ME45/SL45/S55/MC60, ale powinien dzia³aæ tak¿e z
+%description -l pl.UTF-8
+SieFS - wirtualny system plikÃ³w udostÄ™pniajÄ…cy pamiÄ™Ä‡ telefonÃ³w
+komÃ³rkowych Siemens podÅ‚Ä…czonych kablem. Pozwala podmontowaÄ‡ telefon
+spod Linuksa i przeglÄ…daÄ‡ go tak, jak zwykÅ‚y katalog. Program byÅ‚
+testowany na S45/ME45/SL45/S55/MC60, ale powinien dziaÅ‚aÄ‡ takÅ¼e z
 C55/M50/MT50/SL55/C60.
 
 %prep
