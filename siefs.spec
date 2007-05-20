@@ -2,7 +2,7 @@ Summary:	SieFS - virtual filesystem for Siemens mobile phones' memory
 Summary(pl.UTF-8):	SieFS - wirtualny system plików do pamięci telefonów komórkowych Siemens
 Name:		siefs
 Version:	0.5
-Release:	1
+Release:	2
 License:	GPL, partially free (see COPYRIGHT.vmo2wav)
 Group:		Base/Kernel
 Source0:	http://chaos.allsiemens.com/download/%{name}-%{version}.tar.gz
